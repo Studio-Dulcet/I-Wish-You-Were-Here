@@ -34,10 +34,12 @@ void UpdateMenuScreen(void){
         if (mouseOverPlay=true && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
             finishScreen=1;
         }
+        else mouseOverPlay = false;
     }
 }
 
 void DrawMenuScreen(void){
+
     DrawText("test", playButton.x, playButton.y, 160, WHITE);
     ClearBackground(PINK);
 }

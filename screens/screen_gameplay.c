@@ -9,22 +9,22 @@
 static int finishScreen=0;
 
 
-void InitMenuScreen(void){
+void InitGameScreen(void){
 
 }
 
-void UpdateMenuScreen(void){
+void UpdateGameScreen(void){
 
 }
 
-void DrawMenuScreen(void){
+void DrawGameScreen(void){
     ClearBackground(WHITE);
 }
 
-void UnloadMenuScreen(void){
+void UnloadGameScreen(void){
 
 }
 
-int FinishMenuScreen(void){
+int FinishGameScreen(void){
     return finishScreen;
 }
