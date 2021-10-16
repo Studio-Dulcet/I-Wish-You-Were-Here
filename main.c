@@ -52,6 +52,7 @@ int main(void){
     switch (currentScreen){
         case LOGO: UnloadLogoScreen(); break;
         case MENU: UnloadMenuScreen(); break;
+        case GAME: UnloadGameScreen(); break;
         //unload future screens here as well
         default: break;
     }
@@ -68,6 +69,7 @@ static void ChangeToScreen(int screen){
     switch (currentScreen){
         case LOGO: UnloadLogoScreen(); break;
         case MENU: UnloadMenuScreen(); break;
+        case GAME: UnloadGameScreen(); break;
         //add
         default: break;
     }
@@ -75,6 +77,7 @@ static void ChangeToScreen(int screen){
     switch (screen){
         case LOGO: InitLogoScreen(); break;
         case MENU: InitMenuScreen(); break;
+        case GAME: InitGameScreen(); break;
         //add
         default: break;
     }
@@ -99,6 +102,7 @@ static void UpdateTransition(void) {
             switch (transFromScreen) {
                 case LOGO:UnloadLogoScreen(); break;
                 case MENU:UnloadMenuScreen(); break;
+                case GAME:UnloadGameScreen(); break;
                 //add
                 default: break;
             }
@@ -106,6 +110,7 @@ static void UpdateTransition(void) {
             switch (transToScreen) {
                 case LOGO:InitLogoScreen(); break;
                 case MENU:InitMenuScreen(); break;
+                case GAME:InitGameScreen(); break;
                 //add
                 default: break;
             }
@@ -152,8 +157,14 @@ static void UpdateFrame(void)
             case MENU:
             {
                 UpdateMenuScreen();
-                //add
 
+                if (FinishMenuScreen()) TransitionToScreen(GAME);
+
+            } break;
+            case GAME:
+            {
+                UpdateGameScreen();
+                //add
             } break;
             default: break;
         }
@@ -168,6 +179,7 @@ static void UpdateFrame(void)
     {
         case LOGO: DrawLogoScreen(); break;
         case MENU: DrawMenuScreen(); break;
+        case GAME: DrawGameScreen(); break;
         //add
         default: break;
     }

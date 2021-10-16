@@ -37,7 +37,7 @@ endif()
 
 # This is the main part:
 
-add_executable(${PROJECT_NAME} main.c screens/screen_logo.c screens/screen_menu.c screens/screens.h)
+add_executable(${PROJECT_NAME} main.c screens/screen_logo.c screens/screen_menu.c screens/screen_gameplay.c screens/screens.h)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

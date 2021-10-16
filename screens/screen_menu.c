@@ -8,11 +8,14 @@
 static int framesCounter=0;
 static int finishScreen=0;
 Music menuMusic = {0};
+static Rectangle playButton;
+static bool mouseOverPlay = false;
+
 
 void InitMenuScreen(void){
     framesCounter=0;
     finishScreen=0;
-
+    playButton=(Rectangle){GetScreenWidth()/2, GetScreenHeight()/2, MeasureText("meow", 160) + 40, 160};
     PlayMusicStream(menuMusic);
 
     InitAudioDevice();
@@ -24,12 +27,18 @@ void InitMenuScreen(void){
 }
 
 void UpdateMenuScreen(void){
-    if (IsKeyPressed(KEY_ENTER)){ //currently you just press enter and it concludes the screen; need to make actual gui later
-        //add finish screen logic here l8r
+    Vector2 mousePos=GetMousePosition();
+
+    if(CheckCollisionPointRec(mousePos, playButton)){
+        mouseOverPlay=true;
+        if (mouseOverPlay=true && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+            finishScreen=1;
+        }
     }
 }
 
 void DrawMenuScreen(void){
+    DrawText("test", playButton.x, playButton.y, 160, WHITE);
     ClearBackground(PINK);
 }
 

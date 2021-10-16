@@ -5,7 +5,7 @@
 #ifndef YUYUKO_SCREENS_H
 #define YUYUKO_SCREENS_H
 
-typedef enum GameScreen{LOGO=0, MENU} GameScreen;
+typedef enum GameScreen{LOGO=0, MENU, GAME} GameScreen;
 
 extern GameScreen currentScreen;
 #endif
@@ -29,6 +29,13 @@ void UpdateMenuScreen(void);
 void DrawMenuScreen(void);
 void UnloadMenuScreen(void);
 int FinishMenuScreen(void);
+
+//gameplay
+void InitGameScreen(void);
+void UpdateGameScreen(void);
+void DrawGameScreen(void);
+void UnloadGameScreen(void);
+int FinishGameScreen(void);
 
 #ifdef __cplusplus
 }
