@@ -19,6 +19,7 @@ void UpdateGameScreen(void){
 
 void DrawGameScreen(void){
     ClearBackground(WHITE);
+    DrawText("congrats the gameplay screen works", GetScreenWidth()/2, GetScreenHeight()/2, 60, PINK);
 }
 
 void UnloadGameScreen(void){

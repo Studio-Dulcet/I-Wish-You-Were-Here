@@ -9,14 +9,24 @@ static int framesCounter=0;
 static int finishScreen=0;
 Music menuMusic = {0};
 static Rectangle playButton;
+static Rectangle loadButton;
+static Rectangle creditsButton;
 static bool mouseOverPlay = false;
+static bool mouseOverLoad = false;
+static bool mouseOverCredits = false;
+Texture2D menu1;
 
 
 void InitMenuScreen(void){
     framesCounter=0;
     finishScreen=0;
-    playButton=(Rectangle){GetScreenWidth()/2, GetScreenHeight()/2, MeasureText("meow", 160) + 40, 160};
+
+    playButton=(Rectangle){500, 500, MeasureText("meow", 160) + 40, 160};
+    loadButton=(Rectangle){500, 600, MeasureText("meow", 160) + 40, 160};
+    creditsButton=(Rectangle){500, 700, MeasureText("meow", 160) + 40, 160};
+
     PlayMusicStream(menuMusic);
+    Texture2D menu1 = LoadTexture("resources/temp_menu1.png");
 
     InitAudioDevice();
 
@@ -36,13 +46,36 @@ void UpdateMenuScreen(void){
         }
         else mouseOverPlay = false;
     }
+    if(CheckCollisionPointRec(mousePos, loadButton)){
+        mouseOverLoad=true;
+        if (mouseOverLoad=true && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+            finishScreen=2;
+        }
+        else mouseOverLoad = false;
+    }
+    if(CheckCollisionPointRec(mousePos, creditsButton)){
+        mouseOverCredits=true;
+        if (mouseOverCredits=true && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+            finishScreen=3;
+        }
+        else mouseOverCredits = false;
+    }
 }
 
 void DrawMenuScreen(void){
+    BeginDrawing();
 
-    DrawText("test", playButton.x, playButton.y, 160, WHITE);
-    ClearBackground(PINK);
+    ClearBackground(BLACK);
+
+    DrawTexture(menu1, GetScreenWidth(), GetScreenHeight(), WHITE); //TODO figure out why image is not loading in
+
+    DrawText("play", playButton.x, playButton.y, 160, WHITE);
+    DrawText("load", loadButton.x, loadButton.y, 160, WHITE);
+    DrawText("credits", creditsButton.x, creditsButton.y, 160, WHITE);
+
 }
+
+
 
 void UnloadMenuScreen(void){
 

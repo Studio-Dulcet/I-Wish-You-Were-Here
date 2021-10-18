@@ -8,8 +8,8 @@
 GameScreen currentScreen=LOGO;
 Music logoMusic = {0};
 
-static const int screenWidth = 1280;
-static const int screenHeight = 720;
+//static const int screenWidth = 1280;
+//static const int screenHeight = 720;
 
 
 // for raylib logo transitions
@@ -30,7 +30,7 @@ static void UpdateFrame(void); //update + draw frame
 
 //main
 int main(void){
-    InitWindow(screenWidth, screenHeight, "I Wish You Were Here Development Build");
+    InitWindow(GetScreenWidth(), GetScreenHeight(), "I Wish You Were Here Development Build");
 
     InitAudioDevice();
 
@@ -44,6 +44,7 @@ int main(void){
     InitLogoScreen();
 
     SetTargetFPS(59);
+    Texture2D menu1 = LoadTexture("resources/temp_menu1.png");
 
     //game loop
     while (!WindowShouldClose()){
@@ -52,7 +53,9 @@ int main(void){
     switch (currentScreen){
         case LOGO: UnloadLogoScreen(); break;
         case MENU: UnloadMenuScreen(); break;
+        case LOAD: UnloadLoadScreen(); break;
         case GAME: UnloadGameScreen(); break;
+        case CREDITS: UnloadCreditScreen(); break;
         //unload future screens here as well
         default: break;
     }
@@ -69,7 +72,9 @@ static void ChangeToScreen(int screen){
     switch (currentScreen){
         case LOGO: UnloadLogoScreen(); break;
         case MENU: UnloadMenuScreen(); break;
+        case LOAD: UnloadLoadScreen(); break;
         case GAME: UnloadGameScreen(); break;
+        case CREDITS: UnloadCreditScreen(); break;
         //add
         default: break;
     }
@@ -77,7 +82,9 @@ static void ChangeToScreen(int screen){
     switch (screen){
         case LOGO: InitLogoScreen(); break;
         case MENU: InitMenuScreen(); break;
+        case LOAD: InitLoadScreen(); break;
         case GAME: InitGameScreen(); break;
+        case CREDITS: UnloadCreditScreen(); break;
         //add
         default: break;
     }
@@ -102,7 +109,9 @@ static void UpdateTransition(void) {
             switch (transFromScreen) {
                 case LOGO:UnloadLogoScreen(); break;
                 case MENU:UnloadMenuScreen(); break;
+                case LOAD: UnloadLoadScreen(); break;
                 case GAME:UnloadGameScreen(); break;
+                case CREDITS: UnloadCreditScreen(); break;
                 //add
                 default: break;
             }
@@ -110,7 +119,9 @@ static void UpdateTransition(void) {
             switch (transToScreen) {
                 case LOGO:InitLogoScreen(); break;
                 case MENU:InitMenuScreen(); break;
+                case LOAD: InitLoadScreen(); break;
                 case GAME:InitGameScreen(); break;
+                case CREDITS: InitCreditScreen(); break;
                 //add
                 default: break;
             }
@@ -158,13 +169,28 @@ static void UpdateFrame(void)
             {
                 UpdateMenuScreen();
 
-                if (FinishMenuScreen()) TransitionToScreen(GAME);
-
+                if (FinishMenuScreen() == 1) TransitionToScreen(GAME);
+                     if (FinishMenuScreen() == 2) TransitionToScreen(LOAD);
+                         if (FinishMenuScreen() == 3) TransitionToScreen(CREDITS);
             } break;
             case GAME:
             {
                 UpdateGameScreen();
-                //add
+
+            } break;
+            case LOAD:
+            {
+                UpdateLoadScreen();
+
+                UpdateCreditScreen();
+
+                if(FinishLoadScreen() == 2) TransitionToScreen(MENU);
+            } break;
+            case CREDITS:
+            {
+                UpdateCreditScreen();
+
+                if(FinishCreditScreen() == 2) TransitionToScreen(MENU);
             } break;
             default: break;
         }
@@ -179,7 +205,9 @@ static void UpdateFrame(void)
     {
         case LOGO: DrawLogoScreen(); break;
         case MENU: DrawMenuScreen(); break;
+        case LOAD: DrawLoadScreen(); break;
         case GAME: DrawGameScreen(); break;
+        case CREDITS: DrawCreditScreen(); break;
         //add
         default: break;
     }
