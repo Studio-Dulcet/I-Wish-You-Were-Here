@@ -11,10 +11,12 @@ static Rectangle backButton;
 static bool mouseOverBackButton = false;
 
 void InitCreditScreen(void){
+    finishScreen = 0; //adding multiple places because i'm paranoid
     backButton=(Rectangle){500, 500, MeasureText("meow", 160) + 40, 160};
 }
 
 void UpdateCreditScreen(void){
+    finishScreen = 0;
     Vector2 mousePos=GetMousePosition();
 
     if(CheckCollisionPointRec(mousePos, backButton)){

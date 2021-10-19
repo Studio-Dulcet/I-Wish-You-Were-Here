@@ -10,11 +10,11 @@ static int finishScreen=0;
 
 
 void InitGameScreen(void){
-
+    finishScreen = 0;
 }
 
 void UpdateGameScreen(void){
-
+    finishScreen = 0;
 }
 
 void DrawGameScreen(void){
