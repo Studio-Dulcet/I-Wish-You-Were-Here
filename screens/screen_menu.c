@@ -14,7 +14,6 @@ static Rectangle creditsButton;
 static bool mouseOverPlay = false;
 static bool mouseOverLoad = false;
 static bool mouseOverCredits = false;
-Texture2D menu1;
 
 
 void InitMenuScreen(void){
@@ -26,7 +25,7 @@ void InitMenuScreen(void){
     creditsButton=(Rectangle){500, 700, MeasureText("meow", 160) + 40, 160};
 
     PlayMusicStream(menuMusic);
-    Texture2D menu1 = LoadTexture("resources/temp_menu1.png");
+
 
     InitAudioDevice();
 
@@ -65,9 +64,11 @@ void UpdateMenuScreen(void){
 void DrawMenuScreen(void){
     BeginDrawing();
 
-    ClearBackground(BLACK);
 
-    DrawTexture(menu1, GetScreenWidth(), GetScreenHeight(), WHITE); //TODO figure out why image is not loading in
+    Texture2D BG = LoadTexture("resources/temp_menu1.png");
+
+    DrawTexture(BG, 0, 0, RAYWHITE);
+
 
     DrawText("play", playButton.x, playButton.y, 160, WHITE);
     DrawText("load", loadButton.x, loadButton.y, 160, WHITE);
